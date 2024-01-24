@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="colorlib.com">
+    <title>Products</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.42em;
+            color: #A7A1AE;
+            background-color: #1F2739;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 300;
+            line-height: 1em;
+            text-align: center;
+            color: #4DC3FA;
+            margin-top: 30px;
+        }
+
+        h2 {
+            font-size: 1em;
+            font-weight: 300;
+            text-align: center;
+            display: block;
+            line-height: 1em;
+            padding-bottom: 2em;
+            color: #FB667A;
+        }
+
+        h2 a {
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #FB667A;
+            text-decoration: none;
+        }
+
+        .container th h1 {
+            font-weight: bold;
+            font-size: 1em;
+            text-align: left;
+            color: #185875;
+            padding-bottom: 8px; /* Add spacing at the bottom of column header */
+        }
+
+        .container td {
+            font-weight: normal;
+            font-size: 1em;
+            -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+            -moz-box-shadow: 0 2px 2px -2px #0E1119;
+            box-shadow: 0 2px 2px -2px #0E1119;
+            word-break: break-word;
+            border-bottom: 1px solid #ddd; /* Add border between columns */
+            padding-bottom: 8px; /* Add spacing at the bottom of each cell */
+        }
+
+        .container {
+            text-align: left;
+            overflow: hidden;
+            width: 80%;
+            margin: 0 auto;
+            display: table;
+            padding: 0 0 4em 0;
+            border-collapse: collapse; /* Collapse borders between cells */
+        }
+
+        .container th, .container td {
+            padding-left: 2%;
+            padding-right: 2%; /* Add spacing on the right of each cell */
+        }
+
+        /* Background-color of the odd rows */
+        .container tr:nth-child(odd) {
+            background-color: #323C50;
+        }
+
+        /* Background-color of the even rows */
+        .container tr:nth-child(even) {
+            background-color: #2C3446;
+        }
+
+        .container th {
+            background-color: #1F2739;
+            border-bottom: 1px solid #ddd; /* Add border between header and rows */
+        }
+
+        .container td:first-child { color: #FB667A; }
+
+
+        .transparent-btn {
+            background-color: transparent;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .container tr:nth-child(odd) {
+            background-color: #323C50;
+        }
+        
+        .container tr:nth-child(even) {
+            background-color: #2C3446;
+        }
+        
+
+        .search-form {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 200px;
+        }
+
+        .container tr {
+            height: 50px; /* Adjust the height as needed */
+        }
+        
+        .container td, .container th {
+            vertical-align: middle;
+        }
+        
+        .container tr:nth-child(odd) {
+            background-color: #323C50;
+        }
+        
+        .container tr:nth-child(even) {
+            background-color: #2C3446;
+        }
+        
+        .search-btn {
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container td:nth-child(3),
+            .container th:nth-child(3) { display: none; }
+        }
+    </style>
+
+
+</head>
+
+{% block content %}
+{% if request.user.is_authenticated %}
+
+<body style="background: radial-gradient(#653d84, #332042);">
+
+<div class="container" >
+    <h1 style="color:white;"><span class="blue"></span>Product Records<span class="blue"></span></h1>
+    <br><br><br>
+    <!-- Search Form -->
+    <form class="form-inline search-form">
+        <div class="form-group">
+            <label for="searchInput"  style="color:white; padding-left:140px; padding-right:20px;">Search:</label>
+            <input type="text" class="form-control search-input" name="search" id="searchInput" placeholder="Product Name" style="padding-left:20px;">
+        </div>
+        <button type="submit" class="btn btn-primary search-btn" >Search</button>
+    </form>
+
+    <table class="container">
+        <thead>
+            <tr>
+                <th><h1 style="color:white;">Product Name</h1></th>
+                <th><h1 style="color:white;">Product Description</h1></th>
+                <th><h1 style="color:white;">Image</h1></th>
+                <th><h1 style="color:white;">Actions</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr class="{% cycle 'odd' 'even' %}">
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.product_description }}</td>
+                    <td>
+                        {% if product.product_image %}
+                            <img src="{{ product.product_image.url }}" alt="Product Image" style="max-width: 100px;">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'deleteproduct' product.id %}" class="transparent-btn" style="color:#ADD8E6;">Delete</a>
+                        <a href="{% url 'updateproduct' product.id %}" class="transparent-btn" style="color:#ADD8E6;">Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JQUERY -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.steps.js' %}"></script>
+</body>
+{% else %}
+<p>Please <a href="{% url 'login_page' %}">login</a> to access this page.</p>
+{% endif %}
+</html>
+{% endblock %}

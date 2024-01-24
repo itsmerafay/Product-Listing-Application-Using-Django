@@ -1,0 +1,119 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FormWizard_v1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="colorlib.com">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        .image-holder {
+            width: 45%;
+            height: 498px;
+        }
+        .form-content {
+            width: 55%;
+            height: 520px;
+            padding-top: 23px;
+        }
+        .navbar {
+            padding: 1rem 2%;
+        }
+        .navbar-brand {
+            font-size: 1.25rem;
+        }
+		.bg-light {
+			background-color: #A9A9A9 !important;
+		}
+				
+        .btn-primary {
+            background-color: #6d7f52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+
+{% block content %}
+{% if request.user.is_authenticated %}
+
+<body>
+    {{request.user.is_authenticated}}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% if request.user.is_authenticated %}/logout{% else %}/login{% endif %}">
+            {% if request.user.is_authenticated %}Logout{% else %}Login{% endif %}
+        </a>
+    </nav>
+
+    <div class="wrapper" style="background: radial-gradient(#653d84, #332042);">
+        <form action="" id="wizard" method="post" enctype="multipart/form-data">
+            <!-- SECTION 1 -->
+            {% csrf_token %}
+            <section>
+                <div class="inner">
+                    <div class="image-holder">
+                        <img src="{% static 'images/form-wizard-1.jpg' %}" alt="">
+                    </div>
+                    <div class="form-content">
+                        <div class="form-header">
+                            <h3 style="font-size: 33px; margin-bottom: 10px;">List Your Product</h3>
+                        </div>
+                        <p style="font-size:22px; margin-bottom: 8px;">Please fill with your details</p><br>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="text" placeholder="Product Name" class="form-control" name="product_name" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="text" placeholder="Product Description" class="form-control" name="product_description" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="file" placeholder="Image" class="form-control" name="product_image">
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <button class="btn btn-primary" type="submit">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+
+    <!-- JQUERY -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.steps.js' %}"></script>
+    <!-- Template created and distributed by Colorlib -->
+</body>
+{% else %}
+
+<p> Please <a href="{% url "login_page" %}"> login</a> to access the page </p>
+{% endif %}
+</html>
+{% endblock %}
